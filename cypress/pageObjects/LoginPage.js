@@ -1,7 +1,9 @@
 class LoginPage {
   // Method to visit the login page
-  visit() {
-    cy.visit('https://automationexercise.com/login') // Navigate to the login page
+  visit(baseUrl) {
+    // cy.visit('https://automationexercise.com/login') // Navigate to the login page
+    cy.visit(`${baseUrl}/login`) // Navigate to the login page
+
   }
 
   // Method to fill the signup form

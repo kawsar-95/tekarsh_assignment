@@ -14,11 +14,13 @@ describe('UI and API Tests', () => {
   const contactUsPage = new ContactUsPage()
 
   const testEmail = `test_${Date.now()}@test.com`
-  const testPassword = 'TestPassword123'
+  // const testPassword = 'TestPassword123'
+  const testPassword = Cypress.env('TEST_PASSWORD')
+  const baseUrl = Cypress.env('BASE_URL')
 
   it('UI Testing - End to End Flow', () => {
     // 1. Visit the Login Page
-    loginPage.visit()
+    loginPage.visit(baseUrl)
 
     // 2. Sign Up
     loginPage.fillSignupForm(testEmail)
@@ -40,7 +42,8 @@ describe('UI and API Tests', () => {
 
   // API Tests
   it('API Test - Validate Brand List', () => {
-    cy.request('GET', 'https://automationexercise.com/api/brandsList')
+    // cy.request('GET', 'https://automationexercise.com/api/brandsList')
+    cy.request('GET', `${baseUrl}/api/brandsList`)
       .then((response) => {
         expect(response.status).to.eq(200)
         const body = JSON.stringify(response.body)
@@ -66,7 +69,8 @@ describe('UI and API Tests', () => {
   it('API Test - Verify User Login', () => {
     cy.request({
       method: 'POST',
-      url: 'https://automationexercise.com/api/verifyLogin',
+      // url: 'https://automationexercise.com/api/verifyLogin',
+      url: `${baseUrl}/api/verifyLogin`,
       form: true,
       body: { email: testEmail, password: testPassword },
     }).then((response) => {
