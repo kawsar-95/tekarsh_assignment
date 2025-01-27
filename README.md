@@ -11,23 +11,23 @@ This project contains end-to-end tests for the Automation Exercise website using
 
 1. Clone the repository:
 
-   ```sh
-   git clone <repository-url>
-   cd tekarsh_assignment
-   ```
+  ```sh
+  git clone <repository-url>
+  cd tekarsh_assignment
+  ```
 
 2. Install the dependencies:
 
-   ```sh
-   npm install
-   ```
+  ```sh
+  npm install
+  ```
 
 3. Create a `.env` file in the root directory and add the following environment variables:
 
-   ```properties
-   TEST_PASSWORD=TestPassword123
-   TEST_URL=https://automationexercise.com
-   ```
+  ```properties
+  TEST_PASSWORD=TestPassword123
+  TEST_URL=https://automationexercise.com
+  ```
 
 ## Running Tests
 
@@ -116,14 +116,14 @@ describe('UI and API Tests', () => {
 
 ```javascript
   it('UI Testing - End to End Flow', () => {
-    loginPage.visit(testUrl)
-    loginPage.fillSignupForm(testEmail)
-    signUpPage.fillRegistrationDetails(testPassword)
-    menCatPage.selectJeans()
-    productPage.viewAnyProductThenAddToCart()
-    cartPage.proceedToCheckout()
-    cartPage.placeOrder()
-    contactUsPage.fillContactForm()
+   loginPage.visit(testUrl)
+   loginPage.fillSignupForm(testEmail)
+   signUpPage.fillRegistrationDetails(testPassword)
+   menCatPage.selectJeans()
+   productPage.viewAnyProductThenAddToCart()
+   cartPage.proceedToCheckout()
+   cartPage.placeOrder()
+   contactUsPage.fillContactForm()
   })
 ```
 
@@ -131,17 +131,17 @@ describe('UI and API Tests', () => {
 
 ```javascript
   it('API Test - Validate Brand List', () => {
-    cy.request('GET', `${testUrl}/api/brandsList`)
-      .then((response) => {
-        expect(response.status).to.eq(200)
-        const body = JSON.stringify(response.body)
-        expect(body).to.include('Polo')
-        expect(body).to.include('Babyhug')
-        expect(body).to.include('Biba')
-        expect(body).not.to.include('Heineken')
-        expect(body).not.to.include('BMW')
-        expect(body).not.to.include('Razor')
-      })
+   cy.request('GET', `${testUrl}/api/brandsList`)
+    .then((response) => {
+      expect(response.status).to.eq(200)
+      const body = JSON.stringify(response.body)
+      expect(body).to.include('Polo')
+      expect(body).to.include('Babyhug')
+      expect(body).to.include('Biba')
+      expect(body).not.to.include('Heineken')
+      expect(body).not.to.include('BMW')
+      expect(body).not.to.include('Razor')
+    })
   })
 ```
 
@@ -149,16 +149,16 @@ describe('UI and API Tests', () => {
 
 ```javascript
   it('API Test - Verify User Login', () => {
-    cy.request({
-      method: 'POST',
-      url: `${testUrl}/api/verifyLogin`,
-      form: true,
-      body: { email: testEmail, password: testPassword },
-    }).then((response) => {
-      expect(response.status).to.eq(200)
-      const responseBody = JSON.parse(response.body)
-      expect(responseBody.message).to.eq('User exists!')
-    })
+   cy.request({
+    method: 'POST',
+    url: `${testUrl}/api/verifyLogin`,
+    form: true,
+    body: { email: testEmail, password: testPassword },
+   }).then((response) => {
+    expect(response.status).to.eq(200)
+    const responseBody = JSON.parse(response.body)
+    expect(responseBody.message).to.eq('User exists!')
+   })
   })
 })
 ```

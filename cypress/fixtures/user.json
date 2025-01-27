@@ -1,0 +1,7 @@
+{
+  "name": "Test User",
+  "email": "testuser@example.com",
+  "password": "TestPassword123",
+  "subject": "Test Subject",
+  "message": "This is a test message."
+}
